@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>ASS.js 업로드 렌더링 테스트</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <!-- ASS.js (CDN, global) -->
+  <script src="https://cdn.jsdelivr.net/npm/assjs/dist/ass.global.min.js"></script>
+  <style>
+    body { font-family: system-ui, -apple-system, Arial, sans-serif; margin: 20px; }
+    #player { position: relative; width: 800px; max-width: 100%; aspect-ratio: 16/9; background:#111; }
+    #video  { position: absolute; inset: 0; width: 100%; height: 100%; }
+    #ass-container { position: absolute; inset: 0; pointer-events: none; } /* 자막 클릭 통과 */
+    .row { margin: 10px 0; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    button, select, input[type="file"] { padding: 6px 10px; }
+    small { opacity: .7; }
+  </style>
+</head>
+<body>
+  <h1>ASS.js 렌더링 테스트</h1>
+  <div class="row">
+    <label>비디오 파일: <input id="videoFile" type="file" accept="video/*"></label>
+    <label>.ass 파일: <input id="assFile" type="file" accept=".ass,.ssa,text/plain"></label>
+    <label>Resampling:
+      <select id="resampling">
+        <option value="video_height" selected>video_height (기본)</option>
+        <option value="video_width">video_width</option>
+        <option value="script_width">script_width</option>
+        <option value="script_height">script_height</option>
+      </select>
+    </label>
+    <label>Delay(초): <input id="delay" type="number" step="0.1" value="0" style="width:80px"></label>
+    <button id="enterFs">전체화면</button>
+    <button id="hideShow">자막 숨김</button>
+    <small id="status">대기 중</small>
+  </div>
+
+  <div id="player">
+    <video id="video" controls></video>
+    <div id="ass-container"></div>
+  </div>
+
+  <script>
+    const videoEl = document.getElementById('video');
+    const playerEl = document.getElementById('player');
+    const assContainer = document.getElementById('ass-container');
+    const videoInput = document.getElementById('videoFile');
+    const assInput = document.getElementById('assFile');
+    const resamplingSel = document.getElementById('resampling');
+    const delayInput = document.getElementById('delay');
+    const enterFsBtn = document.getElementById('enterFs');
+    const hideShowBtn = document.getElementById('hideShow');
+    const statusEl = document.getElementById('status');
+
+    let ass = null;
+    let assVisible = true;
+
+    function setStatus(msg) { statusEl.textContent = msg; }
+
+    function destroyASS() {
+      if (ass) {
+        ass.destroy();
+        ass = null;
+      }
+    }
+
+    // 비디오 파일 선택 → blob URL로 재생
+    videoInput.addEventListener('change', () => {
+      const f = videoInput.files?.[0];
+      if (!f) return;
+      const url = URL.createObjectURL(f);
+      videoEl.src = url;
+      videoEl.play().catch(() => {/* 자동재생 실패 무시 */});
+      setStatus(`비디오 로드: ${f.name}`);
+    });
+
+    // .ass 파일 선택 → 텍스트 읽어 렌더러 생성/재생
+    assInput.addEventListener('change', async () => {
+      const f = assInput.files?.[0];
+      if (!f) return;
+      const text = await f.text();
+      destroyASS();
+      ass = new window.ASS(text, videoEl, {
+        container: assContainer,
+        resampling: resamplingSel.value, // 초기값 반영
+      });
+      ass.delay = parseFloat(delayInput.value || '0') || 0;
+      assVisible = true;
+      hideShowBtn.textContent = '자막 숨김';
+      setStatus(`ASS 로드: ${f.name}`);
+    });
+
+    // resampling 변경
+    resamplingSel.addEventListener('change', () => {
+      if (ass) ass.resampling = resamplingSel.value;
+    });
+
+    // delay 변경
+    delayInput.addEventListener('change', () => {
+      if (ass) ass.delay = parseFloat(delayInput.value || '0') || 0;
+    });
+
+    // 전체화면: 비디오만이 아니라 래퍼를 전체화면으로 (ASS 함께 표시)
+    enterFsBtn.addEventListener('click', () => {
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      } else {
+        playerEl.requestFullscreen();
+      }
+    });
+
+    // 자막 토글
+    hideShowBtn.addEventListener('click', () => {
+      if (!ass) return;
+      if (assVisible) { ass.hide(); hideShowBtn.textContent = '자막 표시'; }
+      else { ass.show(); hideShowBtn.textContent = '자막 숨김'; }
+      assVisible = !assVisible;
+    });
+
+    // 페이지 나갈 때 정리
+    window.addEventListener('beforeunload', () => { destroyASS(); });
+  </script>
+</body>
+</html>
