@@ -1,0 +1,22 @@
+[Script Info]
+Title: Horror Suspense
+ScriptType: v4.00+
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Victim,Arial,22,&H00C0C0C0,&H000000FF,&H00000000,&H80000000,0,1,0,0,100,100,1,0,1,2,3,2,10,10,10,1
+Style: Ghost,Arial,24,&H008080FF,&H000000FF,&H00000000,&H60000000,0,1,0,0,100,100,2,0,1,2,4,2,10,10,10,1
+Style: Whisper,Arial,16,&H00606060,&H000000FF,&H00000000,&H40000000,0,1,0,0,100,100,3,0,1,1,5,2,10,10,10,1
+Style: Scream,Arial,30,&H000000FF,&H000000FF,&H00FFFFFF,&H80000000,1,0,0,0,120,110,0,0,1,4,0,2,10,10,10,1
+Style: Narration,Arial,20,&H00404040,&H000000FF,&H00000000,&H80000000,0,1,0,0,100,100,0,0,1,2,2,2,10,10,10,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:01.00,0:00:04.50,Narration,,0,0,0,,{\\fad(800,300)\\t(0,2000,\\blur3)\\t(2000,3500,\\blur0)}깊은 밤... 소리 하나 들리지 않는다...
+Dialogue: 0,0:00:05.00,0:00:08.00,Victim,,0,0,0,,{\\fad(400,300)\\t(0,800,\\alpha&H60&)\\t(800,1600,\\alpha&H00&)\\t(1600,2400,\\alpha&H40&)}누... 누구세요?
+Dialogue: 0,0:00:08.50,0:00:11.50,Whisper,,0,0,0,,{\\fad(500,500)\\alpha&H80&\\t(0,1000,\\fsp4)\\t(1000,2000,\\fsp8)\\t(2000,3000,\\fsp4)}(뒤에서... 속삭이는 소리...)
+Dialogue: 0,0:00:12.00,0:00:15.00,Ghost,,0,0,0,,{\\fad(300,300)\\t(0,600,\\frz2)\\t(600,1200,\\frz-2)\\t(1200,1800,\\frz1)\\t(1800,2400,\\frz0)\\alpha&H40&}너를... 찾고 있었다...
+Dialogue: 0,0:00:15.50,0:00:17.50,Victim,,0,0,0,,{\\fad(100,100)\\t(0,400,\\fscx90\\fscy110)\\t(400,800,\\fscx110\\fscy90)\\t(800,1200,\\fscx100\\fscy100)}안 돼... 도망쳐야 해!
+Dialogue: 0,0:00:18.00,0:00:20.50,Scream,,0,0,0,,{\\fad(50,50)\\t(0,300,\\fscx150\\fscy150)\\t(300,600,\\fscx130\\fscy130)\\t(600,1200,\\fscx100\\fscy100)\\shad0}아아아악!!!
+Dialogue: 0,0:00:21.00,0:00:24.00,Ghost,,0,0,0,,{\\fad(200,800)\\t(0,1000,\\blur2)\\t(1000,2000,\\blur4)\\t(2000,3000,\\blur0)\\alpha&H60&}이제... 영원히... 함께다...
+Dialogue: 0,0:00:24.50,0:00:27.00,Narration,,0,0,0,,{\\fad(300,1000)\\t(0,1500,\\alpha&H80&)\\t(1500,2500,\\alpha&HFF&)}그리고 다시... 적막이 흘렀다...

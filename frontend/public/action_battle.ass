@@ -1,0 +1,22 @@
+[Script Info]
+Title: Action Battle Scene
+ScriptType: v4.00+
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Effect, Text
+Style: Fighter1,Arial,26,&H000080FF,&H000000FF,&H00FFFFFF,&H80000000,1,0,0,0,110,100,0,0,1,3,0,4,10,10,10,1
+Style: Fighter2,&H00FF8000,Arial,26,&H000000FF,&H00FFFFFF,&H80000000,1,0,0,0,110,100,0,0,1,3,0,6,10,10,10,1
+Style: Impact,Arial,32,&H000000FF,&H000000FF,&H00FFFFFF,&H80000000,1,0,0,0,130,120,0,0,1,4,0,5,10,10,10,1
+Style: Energy,Arial,20,&H0000FFFF,&H000000FF,&H00000000,&H60000000,1,0,0,0,100,100,0,0,1,2,2,5,10,10,10,1
+Style: Speed,Arial,18,&H0080FF80,&H000000FF,&H00000000,&H40000000,0,1,0,0,100,100,0,0,1,1,1,5,10,10,10,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:01.00,0:00:03.50,Fighter1,,0,0,0,,{\\fad(200,200)\\t(0,400,\\fscx120\\fscy120)\\t(400,800,\\fscx100\\fscy100)\\shad3}필살기 발동!!
+Dialogue: 0,0:00:04.00,0:00:06.00,Energy,,0,0,0,,{\\fad(100,100)\\t(0,300,\\frz90)\\t(300,600,\\frz180)\\t(600,900,\\frz270)\\t(900,1200,\\frz360)\\pos(400,200)}⚡ 번개 장풍! ⚡
+Dialogue: 0,0:00:06.50,0:00:08.50,Fighter2,,0,0,0,,{\\fad(150,150)\\t(0,300,\\fscx80\\fscy80)\\t(300,600,\\fscx120\\fscy120)\\t(600,900,\\fscx100\\fscy100)}이 정도로는...!
+Dialogue: 0,0:00:09.00,0:00:11.00,Impact,,0,0,0,,{\\fad(50,50)\\t(0,200,\\fscx200\\fscy200)\\t(200,400,\\fscx150\\fscy150)\\t(400,600,\\fscx100\\fscy100)\\shad5\\pos(400,300)}💥 BOOM! 💥
+Dialogue: 0,0:00:11.50,0:00:14.00,Speed,,0,0,0,,{\\fad(100,100)\\move(100,400,700,400,0,500)\\t(0,250,\\blur5)\\t(250,500,\\blur0)}쫄면서~~~
+Dialogue: 0,0:00:14.50,0:00:17.00,Fighter1,,0,0,0,,{\\fad(200,200)\\t(0,500,\\frz10)\\t(500,1000,\\frz-10)\\t(1000,1500,\\frz5)\\t(1500,2000,\\frz0)\\t(2000,2500,\\frz-5)}아직 끝나지 않았어!
+Dialogue: 0,0:00:17.50,0:00:20.00,Fighter2,,0,0,0,,{\\fad(150,150)\\t(0,600,\\c&H00FF8000&)\\t(600,1200,\\c&H000080FF&)\\t(1200,1800,\\c&H00FF8000&)\\shad4}그럼 진짜로 가볼까?!
+Dialogue: 0,0:00:20.50,0:00:23.00,Energy,,0,0,0,,{\\fad(100,100)\\t(0,400,\\fscx150\\fscy150)\\t(400,800,\\fscx200\\fscy200)\\t(800,1200,\\fscx100\\fscy100)\\pos(400,150)}🔥 궁극기 충전 중... 🔥
