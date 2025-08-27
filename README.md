@@ -14,12 +14,9 @@ python main.py
 프론트엔드
 
 ```jsx
-# React 프로젝트 생성
 npx create-react-app frontend
 cd frontend
 npm install lucide-react
-# SubtitlePlayer.jsx를 src/components/에 복사
-# App.js에서 SubtitlePlayer import해서 사용
 npm start
 ```
 
